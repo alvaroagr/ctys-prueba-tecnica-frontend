@@ -1,0 +1,32 @@
+<div *ngIf="movie; else notFound" class="movie">
+  <img [src]="movie.image" />
+  <h3>{{ movie.name }}</h3>
+  <h4>Description</h4>
+  <p>{{ movie.description}}</p>
+  <div *ngIf="schedules.length > 0; else comingSoon"class="schedules">
+    <h4>Horarios</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sala</th>
+          <th scope="col">Hora de Inicio</th>
+          <th scope="col">Hora de Fin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schedule of schedules">
+          <th scope="row">{{ schedule.roomId }}</th>
+          <td>{{ schedule.startTime }}</td>
+          <td>{{ schedule.endTime }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #comingSoon>
+    <h4>Próximamente en nuestras salas de cine.</h4>
+  </ng-template>
+</div>
+<ng-template #notFound>
+  <h1>404</h1>
+  <p>No hay película con dicho ID en nuestra base de datos.</p>
+</ng-template>

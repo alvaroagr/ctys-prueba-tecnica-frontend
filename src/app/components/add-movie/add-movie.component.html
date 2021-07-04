@@ -1,0 +1,35 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label class="form-label" for="name">Titulo</label>
+    <input
+      class="form-control"
+      type="text"
+      name="name"
+      id="name"
+      [(ngModel)]="name"
+      placeholder="Titulo de la pelicula"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="description">Descripción</label>
+    <input
+      name="description"
+      class="form-control"
+      id="description"
+      [(ngModel)]="description"
+      placeholder="Descripción de la pelicula"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="image">Imagen</label>
+    <input
+      type="text"
+      class="form-control"
+      name="image"
+      id="image"
+      [(ngModel)]="image"
+      placeholder="URL de la imagen"
+    />
+  </div>
+  <input type="submit" value="Guardar Pelicula" />
+</form>

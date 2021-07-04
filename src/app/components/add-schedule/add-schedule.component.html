@@ -1,0 +1,134 @@
+<div class="container">
+  <button (click)="toggleMovieForm()">
+    {{ showMovieForm ? "Película Existente" : "Nueva Película" }}
+  </button>
+  <form (ngSubmit)="onSubmit()">
+    <div class="">
+      <div *ngIf="showMovieForm; else existingMovie" class="movie-form">
+        <div class="">
+          <label class="form-label" for="name">Titulo</label>
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            id="name"
+            [(ngModel)]="name"
+            placeholder="Titulo de la pelicula"
+          />
+        </div>
+        <div class="">
+          <label class="form-label" for="description">Descripción</label>
+          <input
+            class="form-control"
+            name="description"
+            id="description"
+            [(ngModel)]="description"
+            placeholder="Descripción de la pelicula"
+          />
+        </div>
+        <div class="">
+          <label class="form-label" for="image">Imagen</label>
+          <input
+            class="form-control"
+            type="text"
+            name="image"
+            id="image"
+            [(ngModel)]="image"
+            placeholder="URL de la imagen"
+          />
+        </div>
+      </div>
+      <ng-template #existingMovie>
+        <label class="form-label" for="movie">Biblioteca</label>
+        <select
+          class="form-control"
+          name="movie"
+          id="movie"
+          [(ngModel)]="movieId"
+        >
+          <option value="-1">- Seleccione una película -</option>
+          <option *ngFor="let movie of movies" [ngValue]="movie.id">
+            {{ movie.name }}
+          </option>
+        </select>
+      </ng-template>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label class="form-label" for="roomId">Sala</label>
+        <select
+          class="form-control"
+          name="roomId"
+          id="roomId"
+          [(ngModel)]="roomId"
+        >
+          <option value="-1">- Seleccione una sala -</option>
+          <option *ngFor="let room of rooms" [ngValue]="room.id">
+            {{ room.id }}
+          </option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label" for="start">Hora de Inicio</label>
+        <div class="input-group mb-3">
+          <input
+            name="startTimeHour"
+            id="startTimeHour"
+            type="number"
+            min="0"
+            max="23"
+            class="form-control"
+            placeholder="00"
+            aria-label="Username"
+            [(ngModel)]="startTimeHour"
+          />
+          <span class="input-group-text">:</span>
+          <input
+            name="startTimeMinute"
+            id="startTimeMinute"
+            type="number"
+            min="0"
+            max="59"
+            class="form-control"
+            placeholder="00"
+            aria-label="Server"
+            [(ngModel)]="startTimeMinute"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <label class="form-label" for="start">Hora de Fin</label>
+        <div class="input-group mb-3">
+          <input
+            name="endTimeHour"
+            id="endTimeHour"
+            type="number"
+            min="0"
+            max="23"
+            class="form-control"
+            placeholder="00"
+            aria-label="Username"
+            [(ngModel)]="endTimeHour"
+          />
+          <span class="input-group-text">:</span>
+          <input
+            name="endTimeMinute"
+            id="endTimeMinute"
+            type="number"
+            min="0"
+            max="59"
+            class="form-control"
+            placeholder="00"
+            aria-label="Server"
+            [(ngModel)]="endTimeMinute"
+          />
+        </div>
+      </div>
+    </div>
+    <input
+      class="btn btn-primary btn-block"
+      type="submit"
+      value="Asociar Pelicula"
+    />
+  </form>
+</div>

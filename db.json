@@ -1,0 +1,45 @@
+{
+  "movies": [
+    {
+      "id": 101,
+      "name": "48 Shades",
+      "description": "Comedy|Drama",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/36/48shadesposter.jpg/220px-48shadesposter.jpg"
+    },
+    {
+      "id": 303,
+      "name": "Kotch",
+      "description": "Comedy|Drama",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Kotchposter.jpg/220px-Kotchposter.jpg"
+    },
+    {
+      "name": "Black Widow",
+      "description": "Another MCU movie in a sea of superhero movies",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/Black_Widow_%282021_film%29_poster.jpg/220px-Black_Widow_%282021_film%29_poster.jpg",
+      "id": 304
+    }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "capacity": 30
+    },
+    {
+      "id": 2,
+      "capacity": 20
+    },
+    {
+      "id": 3,
+      "capacity": 50
+    }
+  ],
+  "schedules": [
+    {
+      "roomId": 1,
+      "movieId": 101,
+      "startTime": "09:00",
+      "endTime": "10:10",
+      "id": 1
+    }
+  ]
+}
