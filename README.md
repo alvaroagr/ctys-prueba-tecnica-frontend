@@ -18,4 +18,4 @@ Estos repositorio contiene una aplicación que permite simular la gestión de un
 Para correr el proyecto en servidor de desarrolo, es necesario correr `npm install` para obtener las dependencias del proyecto, y posteriormente `npm start`. Se desplegara en la dirección `http://localhost:8081/`.
 
 ## Backend
-Para ver como de despliega el backend, es necesario clonar **este proyecto**.
+Para ver como de despliega el backend, es necesario clonar [este proyecto](https://github.com/alvaroagr/ctys-prueba-tecnica-backend).
