@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let schedule of schedules">
+        <tr *ngFor="let schedule of schedules" (click)="saveSchedule(schedule)">
           <th scope="row">{{ schedule.roomId }}</th>
           <td>{{ formatDate(schedule.startTime) }}</td>
           <td>{{ formatDate(schedule.endTime) }}</td>

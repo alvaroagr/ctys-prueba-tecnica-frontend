@@ -5,6 +5,7 @@ import { Schedule } from 'src/app/Schedule';
 
 import { MovieService } from 'src/app/services/movie.service';
 import { ScheduleService } from 'src/app/services/schedule.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -18,7 +19,8 @@ export class MovieDetailComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private scheduleService: ScheduleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenSvc: TokenStorageService
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +39,14 @@ export class MovieDetailComponent implements OnInit {
   formatDate(date: any) {
     const d = new Date(date)
     return d.toTimeString().split(' ')[0]
+  }
+
+  saveSchedule(schedule: Schedule) {
+    const userId = this.tokenSvc.getUser().id;
+    const payload = {
+      userId,
+      scheduleId: schedule.id
+    }
+    console.log(payload)
   }
 }

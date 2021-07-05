@@ -75,9 +75,9 @@ export class AddScheduleComponent implements OnInit {
     this.errors = [];
     if (this.roomId === -1)
       this.errors.push('Debes seleccionar una sala para la película');
-    if (!this.startTimeHour || !this.startTimeMinute)
+    if (this.startTimeHour === null || this.startTimeMinute  === null)
       this.errors.push('Debes colocar un horario de inicio');
-    if (!this.endTimeHour || !this.startTimeMinute)
+    if (this.endTimeHour  === null || this.startTimeMinute === null )
       this.errors.push('Debes colocar un horario de fin');
     if (this.showMovieForm) {
       if (!this.name)
@@ -87,7 +87,7 @@ export class AddScheduleComponent implements OnInit {
       if (!this.image)
         this.errors.push('Debes incluir una imagen de la película');
       if (this.errors.length > 0) {
-        this.showErrorModal = true;
+        this.toggleErrorModal()
         return;
       }
       const movie: Movie = {
@@ -126,7 +126,7 @@ export class AddScheduleComponent implements OnInit {
       if (this.movieId === -1)
         this.errors.unshift('Debes seleccionar una película existente');
       if (this.errors.length > 0) {
-        this.showErrorModal = true;
+        this.toggleErrorModal()
         return;
       }
       const schedule: Schedule = {
