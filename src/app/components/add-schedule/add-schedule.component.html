@@ -1,11 +1,29 @@
+<app-error-modal (close)="toggleErrorModal()" *ngIf="showErrorModal">
+  <h1>Error</h1>
+  <p>Haz cometido los siguientes errores. Intenta nuevamente.</p>
+  <ul>
+    <li *ngFor="let error of errors">{{ error }}</li>
+  </ul>
+</app-error-modal>
 <div class="container">
-  <button (click)="toggleMovieForm()">
-    {{ showMovieForm ? "Película Existente" : "Nueva Película" }}
-  </button>
+  <h1>{{ showMovieForm ? "Asociar nueva película a sala" : "Asociar película existente a sala" }}</h1>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-secondary my-btn" (click)="toggleMovieForm()">
+      {{ showMovieForm ? "Película Existente" : "Nueva Película" }}
+    </button>
+    <button
+      class="btn btn-primary btn-block"
+      type="submit"
+      value="Asociar Pelicula"
+      (click)="onSubmit()"
+    >
+      Asociar Pelicula
+    </button>
+  </div>
   <form (ngSubmit)="onSubmit()">
     <div class="">
-      <div *ngIf="showMovieForm; else existingMovie" class="movie-form">
-        <div class="">
+      <div *ngIf="showMovieForm; else existingMovie" class="movie-form mb-3">
+        <div class="mb-3">
           <label class="form-label" for="name">Titulo</label>
           <input
             class="form-control"
@@ -16,7 +34,7 @@
             placeholder="Titulo de la pelicula"
           />
         </div>
-        <div class="">
+        <div class="mb-3">
           <label class="form-label" for="description">Descripción</label>
           <input
             class="form-control"
@@ -26,7 +44,7 @@
             placeholder="Descripción de la pelicula"
           />
         </div>
-        <div class="">
+        <div class="mb-3">
           <label class="form-label" for="image">Imagen</label>
           <input
             class="form-control"
@@ -39,21 +57,23 @@
         </div>
       </div>
       <ng-template #existingMovie>
-        <label class="form-label" for="movie">Biblioteca</label>
-        <select
-          class="form-control"
-          name="movie"
-          id="movie"
-          [(ngModel)]="movieId"
-        >
-          <option value="-1">- Seleccione una película -</option>
-          <option *ngFor="let movie of movies" [ngValue]="movie.id">
-            {{ movie.name }}
-          </option>
-        </select>
+        <div class="mb-3">
+          <label class="form-label" for="movie">Biblioteca</label>
+          <select
+            class="form-control"
+            name="movie"
+            id="movie"
+            [(ngModel)]="movieId"
+          >
+            <option value="-1">- Seleccione una película -</option>
+            <option *ngFor="let movie of movies" [ngValue]="movie.id">
+              {{ movie.name }}
+            </option>
+          </select>
+        </div>
       </ng-template>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col">
         <label class="form-label" for="roomId">Sala</label>
         <select
@@ -125,10 +145,5 @@
         </div>
       </div>
     </div>
-    <input
-      class="btn btn-primary btn-block"
-      type="submit"
-      value="Asociar Pelicula"
-    />
   </form>
 </div>

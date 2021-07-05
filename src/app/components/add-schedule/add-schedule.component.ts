@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 export class AddScheduleComponent implements OnInit {
   showMovieForm: boolean;
   subscription: Subscription;
+  subModal: Subscription;
 
   // Schedule Data
   movieId: number = -1;
@@ -36,6 +37,9 @@ export class AddScheduleComponent implements OnInit {
   image: string;
   showError: boolean;
 
+  showErrorModal: boolean;
+  errors: string[] = [];
+
   movies: Movie[] = [];
   rooms: Room[] = [];
 
@@ -49,6 +53,9 @@ export class AddScheduleComponent implements OnInit {
     this.subscription = this.uiService
       .onToggle()
       .subscribe((value) => (this.showMovieForm = value));
+    this.subModal = this.uiService
+      .onToggleModal()
+      .subscribe((value) => (this.showErrorModal = value));
   }
 
   ngOnInit(): void {
@@ -60,10 +67,27 @@ export class AddScheduleComponent implements OnInit {
     this.uiService.toggleMovieForm();
   }
 
-  onSubmit() {
+  toggleErrorModal(): void {
+    this.uiService.toggleErrorModal();
+  }
+
+  async onSubmit() {
+    this.errors = [];
+    if (this.roomId === -1)
+      this.errors.push('Debes seleccionar una sala para la película');
+    if (!this.startTimeHour || !this.startTimeMinute)
+      this.errors.push('Debes colocar un horario de inicio');
+    if (!this.endTimeHour || !this.startTimeMinute)
+      this.errors.push('Debes colocar un horario de fin');
     if (this.showMovieForm) {
-      if (!this.name || !this.description) {
-        alert('ERROR, FUCK OFF');
+      if (!this.name)
+        this.errors.push('Debes incluir el nombre de la película');
+      if (!this.description)
+        this.errors.push('Debes incluir una descripcion para la película');
+      if (!this.image)
+        this.errors.push('Debes incluir una imagen de la película');
+      if (this.errors.length > 0) {
+        this.showErrorModal = true;
         return;
       }
       const movie: Movie = {
@@ -71,30 +95,25 @@ export class AddScheduleComponent implements OnInit {
         description: this.description,
         image: this.image,
       };
-      // @todo Find a way to refactor code to not have callback hell and code repetition
       this.movieService.addMovie(movie).subscribe(async (newMovie) => {
         await (this.movieId = newMovie.id as number);
         const schedule: Schedule = {
           roomId: this.roomId,
           movieId: this.movieId,
-          startTime: `${
-            parseInt(this.startTimeHour) < 10
-              ? `0${this.startTimeHour}`
-              : `${this.startTimeHour}`
-          }:${
-            parseInt(this.startTimeMinute) < 10
-              ? `0${this.startTimeMinute}`
-              : `${this.startTimeMinute}`
-          }`,
-          endTime: `${
-            parseInt(this.endTimeHour) < 10
-              ? `0${this.endTimeHour}`
-              : `${this.endTimeHour}`
-          }:${
-            parseInt(this.endTimeMinute) < 10
-              ? `0${this.endTimeMinute}`
-              : `${this.endTimeMinute}`
-          }`,
+          startTime: new Date(
+            2022,
+            0,
+            1,
+            parseInt(this.startTimeHour),
+            parseInt(this.startTimeMinute)
+          ),
+          endTime: new Date(
+            2022,
+            0,
+            1,
+            parseInt(this.endTimeHour),
+            parseInt(this.endTimeMinute)
+          ),
         };
 
         this.scheduleService
@@ -104,27 +123,29 @@ export class AddScheduleComponent implements OnInit {
           );
       });
     } else {
+      if (this.movieId === -1)
+        this.errors.unshift('Debes seleccionar una película existente');
+      if (this.errors.length > 0) {
+        this.showErrorModal = true;
+        return;
+      }
       const schedule: Schedule = {
         roomId: this.roomId,
         movieId: this.movieId,
-        startTime: `${
-          parseInt(this.startTimeHour) < 10
-            ? `0${this.startTimeHour}`
-            : `${this.startTimeHour}`
-        }:${
-          parseInt(this.startTimeMinute) < 10
-            ? `0${this.startTimeMinute}`
-            : `${this.startTimeMinute}`
-        }`,
-        endTime: `${
-          parseInt(this.endTimeHour) < 10
-            ? `0${this.endTimeHour}`
-            : `${this.endTimeHour}`
-        }:${
-          parseInt(this.endTimeMinute) < 10
-            ? `0${this.endTimeMinute}`
-            : `${this.endTimeMinute}`
-        }`,
+        startTime: new Date(
+          2022,
+          0,
+          1,
+          parseInt(this.startTimeHour),
+          parseInt(this.startTimeMinute)
+        ),
+        endTime: new Date(
+          2022,
+          0,
+          1,
+          parseInt(this.endTimeHour),
+          parseInt(this.endTimeMinute)
+        ),
       };
 
       this.scheduleService

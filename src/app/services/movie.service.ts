@@ -7,7 +7,7 @@ import { Movie } from '../Movie';
   providedIn: 'root'
 })
 export class MovieService {
-  private apiUrl = 'http://localhost:5000/movies'
+  private apiUrl = 'http://localhost:8080/api/movies'
 
   constructor(private http:HttpClient) { }
 
@@ -15,8 +15,8 @@ export class MovieService {
     return this.http.get<Movie[]>(this.apiUrl);
   }
 
-  getMovie(id: number): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.apiUrl}?id=${id}`);
+  getMovie(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
   addMovie(movie: Movie): Observable<Movie> {

@@ -6,10 +6,17 @@ import { Subject, Observable } from 'rxjs';
 })
 export class UiService {
 
+  private showErrorModal: boolean;
   private showMovieForm: boolean;
   private subject = new Subject<any>();
+  private subjectModal = new Subject<any>();
 
   constructor() { }
+
+  toggleErrorModal(): void {
+    this.showErrorModal = !this.showErrorModal;
+    this.subjectModal.next(this.showErrorModal)
+  }
 
   toggleMovieForm(): void {
     this.showMovieForm = !this.showMovieForm;
@@ -18,5 +25,9 @@ export class UiService {
 
   onToggle(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  onToggleModal(): Observable<any> {
+    return this.subjectModal.asObservable();
   }
 }

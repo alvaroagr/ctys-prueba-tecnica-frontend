@@ -1,1 +1,12 @@
-<p>error-modal works!</p>
+<div class="modal-fade">
+  <div class="backdrop">
+    <div class="my-modal">
+      <div class="header-close">
+        <button (click)="onClick()" class="btn btn-secondary">X</button>
+      </div>
+      <ng-content></ng-content>
+      <!-- <h1>Hello</h1>
+      <p>I'm slim shady</p> -->
+    </div>
+  </div>
+</div>

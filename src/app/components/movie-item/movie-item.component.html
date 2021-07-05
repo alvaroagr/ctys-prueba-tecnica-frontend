@@ -1,4 +1,6 @@
-<div routerLink="/movies/{{movie.id}}" class="movie">
-  <img [src]="movie.image" />
-  <h3>{{ movie.name }}</h3>
+<div routerLink="/movies/{{movie.id}}" class="col card movie">
+  <img [src]="movie.image" class="card-img-top" />
+  <div class="card-body">
+    <h3 class="card-title">{{ movie.name }}</h3>
+  </div>
 </div>

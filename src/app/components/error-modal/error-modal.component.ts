@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-error-modal',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorModalComponent implements OnInit {
 
+  @Output() close: EventEmitter<any> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClick(): void {
+    this.close.emit()
   }
 
 }

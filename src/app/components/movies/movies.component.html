@@ -1,4 +1,8 @@
-<app-movie-item
-  *ngFor="let movie of movies"
-  [movie]="movie"
-></app-movie-item>
+<div class="container">
+  <div class="row row-cols-4">
+    <app-movie-item
+      *ngFor="let movie of movies"
+      [movie]="movie"
+    ></app-movie-item>
+  </div>
+</div>

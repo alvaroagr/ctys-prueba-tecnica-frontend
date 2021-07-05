@@ -2,6 +2,6 @@ export interface Schedule {
   id?: number,
   movieId: number,
   roomId: number,
-  startTime: string,
-  endTime: string,
+  startTime: Date,
+  endTime: Date,
 }

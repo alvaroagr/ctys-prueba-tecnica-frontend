@@ -1,3 +1,6 @@
+.movie {
+  margin: 1rem 0;
+}
 .movie:hover {
   background-color: lightblue;
 }

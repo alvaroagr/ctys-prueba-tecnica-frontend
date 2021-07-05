@@ -13,13 +13,16 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardClientComponent } from './components/board-client/board-client.component';
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 
+import { AuthGuard } from './helpers/auth.guard';
+
+
 const routes: Routes = [
   // { path: '', redirectTo: '/movies', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent },
   { path: 'movies', component: MoviesComponent },
-  { path: 'movies/add', component: AddMovieComponent },
+  { path: 'movies/add', component: AddMovieComponent, canActivate: [AuthGuard] },
   { path: 'movies/:id', component: MovieDetailComponent },
-  { path: 'schedules', component: AddScheduleComponent },
+  { path: 'schedules', component: AddScheduleComponent, canActivate: [AuthGuard] },
   // TUTORIAL
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },

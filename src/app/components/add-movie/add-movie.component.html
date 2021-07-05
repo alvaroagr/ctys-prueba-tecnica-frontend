@@ -1,4 +1,12 @@
-<form (ngSubmit)="onSubmit()">
+<app-error-modal (close)="toggleErrorModal()" *ngIf="showErrorModal">
+  <h1>Error</h1>
+  <p>Haz cometido los siguientes errores. Intenta nuevamente.</p>
+  <ul>
+    <li *ngFor="let error of errors">{{ error }}</li>
+  </ul>
+</app-error-modal>
+<form class="container" (ngSubmit)="onSubmit()">
+  <h1>Agregar una nueva película</h1>
   <div class="mb-3">
     <label class="form-label" for="name">Titulo</label>
     <input
@@ -31,5 +39,7 @@
       placeholder="URL de la imagen"
     />
   </div>
-  <input type="submit" value="Guardar Pelicula" />
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <input class="btn btn-primary" type="submit" value="Guardar Pelicula" />
+  </div>
 </form>
